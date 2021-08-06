@@ -1,0 +1,61 @@
+=== WORKBENCH DESIGN DOC ===
+Workbench Code By WittyWhiscash
+
+=== CONCEPT ===
+Original concept is based on the workbench from the Last Of Us / upgradeable 
+weapons/tools from a gazillion games.
+
+The basic idea is that you have one weapon/tool that you upgrade throughout the
+game. Several different upgrades require several different items and kits in order
+to make the upgrade. These upgrades add new additional skills/abilities, or bump
+stats to make the weapon/tool better.
+
+The workbench is split up into three "slots": Item, Material, and Tool. When all three
+are present, and placed in the correct order (Item, Material, Tool), the result is shown
+on a fourth slot which the player can then take. Once that happens, the item, material,
+and tool are consumed and the workbench is reset.
+
+=== TECHNICAL IMPLEMENTATION ===
+* The workbench stores items for the upgrade through the use of armor stands with hands.
+
+* The game stores data about the iterations / status both in scoreboard flags and in NBT data storage.
+
+* On first load, the pack sets up the storage layout and basic flags for the pack. 
+
+* When an armor stand with the proper tag detects an interaction (through the use of advancements), 
+it runs the main entrypoint. This reduces weight of operations by reducing the operation
+to only happen when the workbench is updated, rather than every tick.
+
+* When the entrypoint first occurs, it checks to see if an item was removed from the three slots. If
+so, the workbench kills the output slot and resets the recipe as well as related flags.
+
+* The entrypoint then checks through the key if an Item is placed in its slot, or a stack of chests 
+with all the base items / items with intermediary upgrades. If it finds a match, the index is stored, 
+the first instance of the item is found in the recipe stack, the function stores the found item in storage, 
+and the function likely terminates with no other operations and waits for the next slot. If the item is NOT 
+found, a flag is set so the output can't be properly summoned. 
+
+* If an item is found, the entrypoint then does the same for the material slot, checking the recipe stack to 
+find a matching material, and setting the recipe for the next slot check. The function likely terminates if a 
+match is found and stored in storage. If not, a flag is set so the output can't be properly summoned.
+
+* If both are found and are still there, it moves on to the final tool slot check, checking if there is a
+match for the selected recipe. If it does find a match, the recipe is complete. If a match is not found, a flag is
+set so the output can't be properly summoned. 
+
+* If all items are found and the recipe is inputted in the correct order, the final output is found in the recipe 
+stack and the output is summoned with a placeholder and modified so the resulting item is there. If no match is found,
+an empty output slot is summoned.
+
+* Finally, the advancement that activated this in the first place is revoked so the whole process can occur again.
+
+=== IMPLEMENTED SO FAR ===
+
+-> Workbench summoning
+-> Iterable search through chests to find a match
+-> Recipe detection
+-> Result summoning
+
+=== TODO ===
+
+-> Implement recipe stack and searching through recipe stack for items proper using item index
