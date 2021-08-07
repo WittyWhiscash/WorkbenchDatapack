@@ -11,9 +11,14 @@
 
 # Reset the proper flag for which slot was reset
     execute if entity @s[tag=workbench_input] run scoreboard players set !itemNotFound storage 0
+    execute if entity @s[tag=workbench_input] run data modify storage work:bench itemFound set value {}
     execute if entity @s[tag=workbench_materials] run scoreboard players set !materialNotFound storage 0
+    execute if entity @s[tag=workbench_materials] run data modify storage work:bench materialFound set value {}
     execute if entity @s[tag=workbench_tool] run scoreboard players set !toolNotFound storage 0
+    execute if entity @s[tag=workbench_tool] run data modify storage work:bench toolFound set value {}
 
 # Reset global item search flags
     scoreboard players set !keysLoaded storage 0
     scoreboard players set !tempItemsLoaded storage 0
+    scoreboard players set !iteration storage 0
+    scoreboard players set !index storage 0

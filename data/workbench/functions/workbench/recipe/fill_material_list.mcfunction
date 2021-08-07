@@ -9,6 +9,8 @@
     execute if score !keysLoaded storage matches 0 run data modify entity @s Pos[0] set from storage work:bench recipeStackKey.x
     execute if score !keysLoaded storage matches 0 run data modify entity @s Pos[1] set from storage work:bench recipeStackKey.y
     execute if score !keysLoaded storage matches 0 run data modify entity @s Pos[2] set from storage work:bench recipeStackKey.z
+    execute as @s run function workbench:workbench/recipe/set_x_index
+    
     # tellraw @a [{"text": "Marker Pos After Recipe Stack Mod: X:"},{"nbt":"Pos[0]","entity": "@s"},{"text": ", Y:"},{"nbt":"Pos[1]","entity": "@s"},{"text": ", Z:"},{"nbt":"Pos[2]","entity": "@s"}]
     execute if score !keysLoaded storage matches 0 run scoreboard players set !keysLoaded storage 1
 

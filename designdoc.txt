@@ -55,7 +55,7 @@ an empty output slot is summoned.
 -> Iterable search through chests to find a match
 -> Recipe detection
 -> Result summoning
+-> Recipe stack searching
+-> NBT item detection
 
 === TODO ===
-
--> Implement recipe stack and searching through recipe stack for items proper using item index

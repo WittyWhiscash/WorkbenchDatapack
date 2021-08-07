@@ -23,6 +23,7 @@
 
 # If the key position list has another entry, reset a flag and iterate again 
     execute if score !keysLoaded storage matches 1 if data storage work:bench keyPositionList[0].x run scoreboard players set !tempItemsLoaded storage 0
+    execute if score !keysLoaded storage matches 1 if data storage work:bench keyPositionList[0].x run scoreboard players add !iteration storage 1
     execute if score !keysLoaded storage matches 1 if data storage work:bench keyPositionList[0].x run function workbench:workbench/recipe/fill_item_list
 
 

@@ -12,8 +12,6 @@
 # Copy the next item over to the current iteration and store whether we pulled an item from the list or not successfully in data storage
     execute store success storage work:bench iterationSuccess int 1 run data modify storage work:bench currentIteration set from storage work:bench itemList[0]
 
-    data modify storage work:bench currentIteration.Slot set from storage work:bench itemList[0].Slot
-
     # tellraw @a [{"text":"Current Iterable Item ID: "},{"storage":"work:bench","nbt":"currentIteration.id"},{"text":"Current Iterable Item Tag: "},{"storage":"work:bench","nbt":"currentIteration.tag"},{"text":"Current Iterable Item Slot: "},{"storage":"work:bench","nbt":"currentIteration.Slot"},{"text":", Iteration Success: "},{"storage":"work:bench","nbt":"iterationSuccess"}]
 
 # If there's no item (it detects no ID) in the first slot of the list, mark it as a failed match and set some flags so the iteration stops
